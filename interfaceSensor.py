@@ -8,7 +8,7 @@ import os
 import interfaceDatosArduino
 
 
-interacciondb = mongo.MongoConexion("mongodb://localhost:27017", "sistemaSensores", "Sensores")
+interacciondb = mongo.MongoConexion("mongodb+srv://admin:luisskate13@cluster0.7einrmk.mongodb.net/test", "sistemaSensores", "Sensores")
 
 class InterfaceSensor():
     def __init__(self):

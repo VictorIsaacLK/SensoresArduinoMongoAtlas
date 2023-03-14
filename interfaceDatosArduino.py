@@ -9,7 +9,7 @@ import serial
 import time
 
 
-interacciondb = mongo.MongoConexion("mongodb://localhost:27017", "sistemaSensores", "DatosSensores")
+interacciondb = mongo.MongoConexion("mongodb+srv://admin:luisskate13@cluster0.7einrmk.mongodb.net/test", "sistemaSensores", "DatosSensores")
 
 class InterfaceDatosSensor():
     def __init__(self):
@@ -47,6 +47,8 @@ class InterfaceDatosSensor():
             mylista = lista
         print("ID".ljust(5) +"\t\t" + 'nombre'.ljust(20)+ "\t\t" + 'Datos'.ljust(20)+'Fecha'.ljust(20)+'')
         i = 0
+        
+
 
 
 
@@ -54,7 +56,7 @@ class InterfaceDatosSensor():
         for listaSensor in mylista:
             print(str(i).ljust(5) + "\t\t" + listaSensor.nombre+"\t\t" + str(listaSensor.datos) +  listaSensor.medida+ "\t\t"+listaSensor.fecha )
             i += 1
-
+        time.sleep(5)
 
 
 
@@ -78,21 +80,21 @@ class InterfaceDatosSensor():
         id = 0
 
 
-        ser = serial.Serial('COM5 ', 9600)  # Reemplaza 'COM3' con el nombre del puerto serial del Arduino
+        ser = serial.Serial('/dev/ttyUSB0', 9600)  # Reemplaza 'COM3' con el nombre del puerto serial del Arduino
         i=0
         for listaSensor in mylistaS:
 
             cadena = ser.readline()
-            nom = cadena.decode('utf-8').rstrip()
+            nom = cadena.decode('utf-8')
 
 
 
 
             cadena = ser.readline()
-            dats = cadena.decode('utf-8').rstrip()
+            dats = cadena.decode('utf-8')
 
             cadena = ser.readline()
-            medida = cadena.decode('utf-8').rstrip()
+            medida = cadena.decode('utf-8')
 
             now = datetime.now()
 
@@ -141,6 +143,7 @@ class InterfaceDatosSensor():
                 time.sleep(5)
 
                 self.mostrarSensor()
+
                 self.modificarSensor()
 
 
